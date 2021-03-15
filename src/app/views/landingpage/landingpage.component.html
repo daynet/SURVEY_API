@@ -1,0 +1,144 @@
+<app-header [navbarBrandRouterLink]="['/dashboard']" [fixed]="true"
+    [navbarBrandFull]="{src: 'assets/img/brand/logo.png', width: 140, height: 50, alt: 'SUN Logo'}"
+    [sidebarToggler]="'lg'" [asideMenuToggler]="'lg'">
+    <ul class="nav navbar-nav d-md-down-none">
+
+    </ul>
+    <ul class="nav navbar-nav ml-auto">
+
+        <li class="nav-item dropdown" dropdown placement="bottom right">
+
+            <!-- <img src="assets/img/buidling.png" alt="Skyline" height="50" width="45"> -->
+            <!-- [navbarBrandFull]="{src: 'assets/img/brand/logo.png', width: 89, height: 25, alt: 'SUN Logo'}" -->
+
+
+        </li>
+    </ul>
+
+</app-header>
+<br/>
+<br/>
+<br/>
+<div class="app-body">
+    <main class="main d-flex align-items-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 mx-auto">
+            <div class="card mx-4">
+              <div class="card-body p-4">
+                <form  [formGroup]="CourseForm">
+                  <h2>Evaluate Faculty</h2>
+                  <p class="text-muted"></p>
+
+               
+                  
+                        <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="icon-user"></i></span>
+                        </div>
+                        <select  [ngClass]="{'is-invalid':f.Faculty_id.errors}" formControlName="Faculty_id" class="form-control" required
+                        (change)="getFacultyDetails($event.target.value)" >
+                            <option value = "" >---Select Course---</option>
+                            <option *ngFor = "let c of courseList" value="{{c.Cdd_Code}}">{{c.Cdd_Description}}</option>
+                            </select>
+                      </div>  
+
+                      <div>
+
+                        <p>Faculty Name:    {{this.facName}}</p>
+                      </div>
+                    
+                      <!-- <button type="submit" (click)="start()"  class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
+                        Start</button> -->
+                  <!-- <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="icon-user"></i></span>
+                    </div>
+                    <input [ngClass]="{'is-invalid':f.userName.errors}" type="text" formControlName="userName" class="form-control" placeholder="User Name" autocomplete="User Name" required>
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="icon-lock"></i></span>
+                    </div>
+                    <input [ngClass]="{'is-invalid':f.password.errors}" type="password" formControlName="password" class="form-control" placeholder="Password" autocomplete="new-password" required>
+                  </div>
+                  <div class="input-group mb-4">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="icon-lock"></i></span>
+                    </div>
+                    <input [ngClass]="{'is-invalid':f.passwordConfirm.errors}" formControlName="passwordConfirm" type="password" class="form-control" placeholder="Repeat password" autocomplete="new-password" required>
+                  </div> -->
+                  <!-- <button type="button" [disabled]="!CourseForm.valid" (click)="SubmitRegistration(CourseFormForm)" class="btn btn-block btn-success">Create Account</button> -->
+                </form>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+
+<div class="app-body"   >
+        <main class="main d-flex align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 mx-auto">
+                        <div>
+             
+                                    <div>
+                                           
+                                            <H1 *ngIf="UserCategory== 'Survey'"  class="text-center"> QUESTIONNAIRE FOR {{displayDesignation}} </H1>
+                                            <br />
+                                            <h2 *ngIf="UserCategory== 'Survey'" class="text-center"> Objective of the questionnaire: </h2>
+                                            <br/>
+                                            <h1 *ngIf="UserCategory== 'FeedBack'" class="text-center"> STUDENT FEEDBACK INSTRUCTION </h1>
+                                            <br/>
+                                            
+                                            <ul *ngIf="displayDesignation=='STUDENT FACULTY FEEDBACK'" style="font-size: large;">
+                                                <!-- <li>To enable us serve you better through your responses from this feedback</li><br/> -->
+                                              
+                                                 Rate the following factors on a scale of 1 to 3 where 3 being Good and 1 being Poor or a scale of 5 to 1 (5-Strongly Agree, 4-Agree, 3-Neutral, 2-Disagree and 1-Strongly Disagree), which indicates the level of your agreement.<br/>
+                                              </ul>
+
+                             
+                                            <ul *ngIf="(displayDesignation =='FACULTY') || (displayDesignation =='SENATE') || (displayDesignation =='HOD') || (displayDesignation =='OPERATIONAL STAFF')" style="font-size: large;">
+                                                <li>To provide inputs to management about the extent to which SUN core values and instilled in our employees.</li><br/>
+                                                <li>Determine employee’s understanding and belief in SUN vision, mission, organizational goals and objectives.</li><br/>
+                                                <li>To gauge the perception of employee towards organization and commitment level towards the development of organization</li><br/>
+                                                <li>Measure the level of engagement and satisfaction of employee.</li><br/>
+                                                <li>To identify the problem areas at ground level and opportunities of improvement</li>
+                                              </ul>
+
+                                              <ul *ngIf="displayDesignation=='FEEDBACK'" style="font-size: large;">
+                                                <li>To enable us serve you better through your responses from this feedback</li><br/>
+                                                <li>We would appreciate your precious feedback in responding to the following questions pertaining to services offered by various Department in the school. We believe that this survey would certainly help us to serve you better in the future. Rate the following factors in a scale of 1 to 3 where 3 being Good and 1 being Poor or a scale of 5 to 1 (5-Strongly Agree, 4-Agree, 3-Neutral, 2-Disagree and 1-Strongly Disagree), which indicates the level of your agreement.</li><br/>
+                                              </ul>
+                                              <ul *ngIf="(displayDesignation=='LIBRARY FACILITIES')|| (displayDesignation =='SPORTS DEPARTMENT')|| (displayDesignation =='COMPUTING & INSTRUCTION SUPPORT')|| (displayDesignation =='COUNSELING OFFICE')|| (displayDesignation =='STUDENT AFFAIRS OFFICE') || (displayDesignation =='MARKETING & REGISTRATIONS')|| (displayDesignation =='FINANCE DEPARTMENT')|| (displayDesignation =='ADMINISTRATION & EXAMINATION') || (displayDesignation =='LABORATORIES & INSTRUCTION SUPPORT')|| (displayDesignation =='FACULTY SATISFACTION SURVEY')" style="font-size: large;"> 
+                                                <li>To enable us serve you better through your responses from this feedback</li><br/>
+                                                <li>We would appreciate your precious feedback in responding to the following questions
+                                                     pertaining to services offered by Academic Support Department .
+                                                      We believe that this survey would certainly help us to serve you better in the future. 
+                                                      Rate the following factors in a scale of 1 to 3 where 3 being Good and 1 being Poor. </li><br/>
+                                              </ul>
+                                            <button type="submit" (click)="start()"  class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i>
+                                                Start</button>
+                                   </div>
+                              
+                            
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+   
+      
+      
+
+
+

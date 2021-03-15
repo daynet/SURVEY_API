@@ -1,0 +1,192 @@
+<app-header [navbarBrandRouterLink]="['/dashboard']" [fixed]="false"
+  [navbarBrandFull]="{src: 'assets/img/brand/logo.png', width: 140, height: 50, alt: 'SUN Logo'}"
+  [sidebarToggler]="'lg'" [asideMenuToggler]="'lg'">
+
+  <ul class="nav navbar-nav ml-auto">
+
+    <li class="nav-item dropdown" dropdown placement="bottom right">
+
+      <!-- <img src="assets/img/buidling.png" alt="Skyline" height="50" width="45"> -->
+      <!-- [navbarBrandFull]="{src: 'assets/img/brand/logo.png', width: 89, height: 25, alt: 'SUN Logo'}" -->
+
+
+    </li>
+  </ul>
+
+</app-header>
+<br />
+<br />
+<br />
+
+
+<div class="app-body" *ngIf="displayMainForm">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="card mx-4">
+            <div class="card-header">
+              <i class="fa fa-align-justify"></i>
+              <!-- <h3 class="pull-right"><countdown [config]="{ leftTime: 1200, format: 'm:s' }"></countdown></h3> -->
+              <span style="font-size: x-large;"> <b> {{displaySectionName}}</b></span>
+              <h3 class="pull-right"></h3>
+            </div>
+            <div class="card-body p-4">
+              <div class="animated fadeIn">
+                <form novalidate [formGroup]="surveyForm">
+
+
+                  <div class="group-gap">
+                    <h5 class="mb-3">
+                      <p> {{question}}</p>
+                    </h5>
+                    <div class="d-block my-3">
+
+                      <div class="custom-control custom-radio">
+                        <input id="stronglyagree" type="radio" class="custom-control-input" value="stronglyagree"
+                          formControlName="optionControl" (change)="handleAChange($event.target.checked)">
+
+                        <label class="custom-control-label" for="stronglyagree">{{optionA}}</label>
+                      </div>
+
+                      <div class="custom-control custom-radio">
+                        <input id="agree" type="radio" class="custom-control-input" value="agree"
+                          formControlName="optionControl" (change)="handleBChange($event.target.checked)">
+                        <label class="custom-control-label" for="agree">{{optionB}}</label>
+                      </div>
+
+
+                      <div class="custom-control custom-radio">
+                        <input id="unsure" type="radio" class="custom-control-input" value="unsure"
+                          formControlName="optionControl" (change)="handleCChange($event.target.checked)">
+                        <label class="custom-control-label" for="unsure">{{optionC}}</label>
+                      </div>
+
+                      <div *ngIf="optionD" class="custom-control custom-radio">
+                        <input id="disagree" type="radio" class="custom-control-input" value="disagree"
+                          formControlName="optionControl" (change)="handleDChange($event.target.checked)">
+                        <label class="custom-control-label" for="disagree">{{optionD}}</label>
+                      </div>
+                      <div *ngIf="optionE" class="custom-control custom-radio">
+                        <input id="stronglydisagree" type="radio" class="custom-control-input" value="stronglydisagree"
+                          formControlName="optionControl" (change)="handleEChange($event.target.checked)">
+                        <label class="custom-control-label" for="stronglydisagree">{{optionE}}</label>
+                      </div>
+
+                      <div *ngIf="optionF" class="custom-control custom-radio">
+                        <input id="notapplicable" type="radio" class="custom-control-input" value="notapplicable"
+                          formControlName="optionControl" (change)="handleFChange($event.target.checked)">
+                        <label class="custom-control-label" for="notapplicable">{{optionF}}</label>
+                      </div>
+
+
+
+                    </div>
+                  </div>
+
+
+                </form>
+                <div *ngIf="Department != 7" class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="icon-user"></i></span>
+                  </div>
+                  <!--  <ckeditor [config]="editorConfig" [editor]="Editor" required [(ngModel)]="conplaintDetail" data=""
+      name="text"></ckeditor> -->
+                  <!-- <ckeditor [editor]="Editor"  required [(ngModel)]="conplaintDetail" data="" 
+      name="text"></ckeditor> -->
+                  <textarea type="text" id="form7" class="lg-textarea lg-textarea-auto form-control" mdbInput
+                    [(ngModel)]="remark" placeholder="Type remark here"></textarea>
+
+                </div>
+
+
+
+
+                <!-- </div> -->
+              </div>
+            </div>
+            <div class="card-footer">
+
+              <!-- <button (click)="Previous()" [disabled]="disabledPrevious" type="reset" class="btn btn-sm btn-dark"><i class="angle-double-left"></i> Previous</button> -->
+              <button (click)="Next()" [disabled]="disabledNext" type="reset" class="btn btn-sm btn-dark"><i
+                  class="angle-double-right"></i> Next</button>
+              <div class="pull-right">
+                <b>{{pagination}}</b>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+
+
+<div class="app-body" *ngIf="displayOtherForm">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="card mx-4">
+            <div class="card-header">
+              <i class="fa fa-align-justify"></i>
+              <!-- <h3 class="pull-right"><countdown [config]="{ leftTime: 1200, format: 'm:s' }"></countdown></h3> -->
+              <span style="font-size: x-large;"> <b> {{displaySectionName}}</b></span>
+              <h3 class="pull-right"></h3>
+            </div>
+            <div class="card-body p-4">
+              <div class="animated fadeIn">
+                <form novalidate [formGroup]="surveyForm">
+
+
+                  <div class="group-gap">
+                    <h5 class="mb-3">
+                      <p> {{question}}</p>
+                    </h5>
+                    <div class="d-block my-3">
+
+
+
+
+                    </div>
+                  </div>
+
+
+                </form>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="icon-user"></i></span>
+                  </div>
+                  <!--  <ckeditor [config]="editorConfig" [editor]="Editor" required [(ngModel)]="conplaintDetail" data=""
+    name="text"></ckeditor> -->
+                  <!-- <ckeditor [editor]="Editor"  required [(ngModel)]="conplaintDetail" data="" 
+    name="text"></ckeditor> -->
+                  <textarea type="text" id="form7" class="lg-textarea lg-textarea-auto form-control" mdbInput
+                    [(ngModel)]="remark" placeholder="Type remark here"></textarea>
+
+                </div>
+
+
+
+
+                <!-- </div> -->
+              </div>
+            </div>
+            <div class="card-footer">
+
+              <!-- <button (click)="Previous()" [disabled]="disabledPrevious" type="reset" class="btn btn-sm btn-dark"><i class="angle-double-left"></i> Previous</button> -->
+              <button (click)="NextOther()" [disabled]="disabledNext" type="reset" class="btn btn-sm btn-dark"><i
+                  class="angle-double-right"></i> Next</button>
+              <div class="pull-right">
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
